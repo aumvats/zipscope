@@ -1,0 +1,8 @@
+{
+  "project_id": "project-1773902365",
+  "critic_verdict": "VERDICT:REWRITE",
+  "total_score": 70,
+  "min_score": 5,
+  "ran_refiner": true,
+  "final_status": "queued"
+}
