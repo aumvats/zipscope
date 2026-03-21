@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
   const month = getCurrentMonth();
 
   const { data } = await supabase
-    .from('usage')
+    .from('zipscope_usage')
     .select('lookup_count')
     .eq('user_id', userId)
     .eq('month', month)
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
   // Upsert usage record
   const { data: existing } = await supabase
-    .from('usage')
+    .from('zipscope_usage')
     .select('lookup_count')
     .eq('user_id', userId)
     .eq('month', month)
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
 
   if (existing) {
     const { error: updateError } = await supabase
-      .from('usage')
+      .from('zipscope_usage')
       .update({ lookup_count: currentCount + 1 })
       .eq('user_id', userId)
       .eq('month', month);
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
     }
   } else {
     const { error: insertError } = await supabase
-      .from('usage')
+      .from('zipscope_usage')
       .insert({ user_id: userId, month, lookup_count: 1 });
     if (insertError) {
       console.error('[usage] Failed to create usage record for user', userId, insertError);

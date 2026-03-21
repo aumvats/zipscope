@@ -12,7 +12,7 @@ export async function GET(
 
   const supabase = createServerSupabaseClient();
   const { data, error } = await supabase
-    .from('reports')
+    .from('zipscope_reports')
     .select('*')
     .eq('id', params.id)
     .eq('user_id', userId)
@@ -35,7 +35,7 @@ export async function DELETE(
 
   const supabase = createServerSupabaseClient();
   const { error } = await supabase
-    .from('reports')
+    .from('zipscope_reports')
     .delete()
     .eq('id', params.id)
     .eq('user_id', userId);

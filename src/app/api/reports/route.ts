@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 
   const supabase = createServerSupabaseClient();
   const { data, error } = await supabase
-    .from('reports')
+    .from('zipscope_reports')
     .select('*')
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 
   // Check report limit (free: 5, pro: 50)
   const { count, error: countError } = await supabase
-    .from('reports')
+    .from('zipscope_reports')
     .select('*', { count: 'exact', head: true })
     .eq('user_id', userId);
 
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
   }
 
   const { data, error } = await supabase
-    .from('reports')
+    .from('zipscope_reports')
     .insert({
       user_id: userId,
       zip_code,
